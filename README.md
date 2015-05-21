@@ -18,6 +18,7 @@ The provided example design was written for the [Xilinx Vivado tools](http://www
 - Simulation Test benches
 	- Test benches for each AXI4 channel
 	- Test benches for the entire system
+	- Bus Functional Model (BFM) test environment
 - Example C software code for initiating a Custom AXI4 Master transaction from the Cortex A9 APU
 - Example HDL design for controlling the Custom AXI4 Master
 
