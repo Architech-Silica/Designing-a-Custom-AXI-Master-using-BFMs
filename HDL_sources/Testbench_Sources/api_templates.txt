@@ -1,0 +1,225 @@
+//AXI4 FUNCTION API TEMPLATES
+
+//AXI4 Master Function Write Burst API
+<BFM_INST>.WRITE_BURST (
+  <ID>,                 // Input (typ = 0)
+  <WR_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED} (typ = `BURST_TYPE_INCR = 2'b01)
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE} (typ = `LOCK_TYPE_NORMAL = 1'b0)
+  <CACHE>,              // Input (typ = `MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011))
+  <PROT>,               // Input (typ = `PROT_DATA_SECURE_UNPRIV = 3'b000))
+  <WR_DATA>,            // Input bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <DATA_SIZE>,          // Input = (<BURST_LEN>+1) * `DATA_WIDTH_BYTES
+  <REGION>,             // Input (typ = 0)
+  <QOS>,                // Input (typ = 0)
+  <AWUSER>,             // Input (typ = 0)
+  <WUSER>,              // Input bitstring of length (<BURST_LEN>+1) * `WUSER_BUS_WIDTH (typ = 0)
+  <WR_RSP>,             // Output range {`RESPONSE_OKAY, `RESPONSE_EXOKAY, `RESPONSE_SLVERR, `RESPONSE_DECERR}   
+  <BUSER>               // Output
+  );
+  
+//AXI4 Master Function Read Burst API
+<BFM_INST>.READ_BURST (
+  <ID>,                 // Input (typ = 0)
+  <RD_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED} (typ = `BURST_TYPE_INCR = 2'b01)
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE} (typ = `LOCK_TYPE_NORMAL = 1'b0)
+  <CACHE>,              // Input (typ = `MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011)
+  <PROT>,               // Input (typ = `PROT_DATA_SECURE_UNPRIV = 3'b000)
+  <REGION>,             // Input (typ = 0)
+  <ARUSER>,             // Input (typ = 0)
+  <QOS>,                // Input (typ = 0)
+  <RD_DATA>,            // Output bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <RD_RSP>,             // Output bitstring of length (<BURST_LEN>+1) * 2
+  <RUSER>               // Output bitstring of length (<BURST_LEN>+1) * `RUSER_BUS_WIDTH
+  );
+  
+//AXI4 MASTER CHANNEL WRITE BURST API TEMPLATES
+
+//AXI4 Master Channel SEND_WRITE_ADDRESS API
+<BFM_INST>.SEND_WRITE_ADDRESS (
+  <ID>,                 // Input (typ = 0)
+  <WR_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED} (typ = `BURST_TYPE_INCR = 2'b01)
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE} (typ = `LOCK_TYPE_NORMAL = 1'b0)
+  <CACHE>,              // Input (typ = `MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011)
+  <PROT>,               // Input (typ = `PROT_DATA_SECURE_UNPRIV = 3'b000)
+  <REGION>,             // Input (typ = 0)
+  <QOS>,                // Input (typ = 0)
+  <AWUSER>              // Input (typ = 0)
+  );
+  
+//AXI4 Master Channel SEND_WRITE_BURST API
+<BFM_INST>.SEND_WRITE_BURST (
+  <WR_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255} 
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED} (typ = `BURST_TYPE_INCR = 2'b01)
+  <WR_DATA>,            // Input bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <DATA_SIZE>,          // Input = (<BURST_LEN>+1) * `DATA_WIDTH_BYTES
+  <WUSER>               // Input bitstring of length (<BURST_LEN>+1) * `WUSER_BUS_WIDTH (typ = 0)
+  );
+  
+//AXI4 Master Channel RECEIVE_WRITE_RESPONSE API         
+<BFM_INST>.RECEIVE_WRITE_RESPONSE (
+  <ID>,                 // Input bitstring of length `ID_WIDTH
+  <WR_RSP>,             // Output range {`RESPONSE_OKAY, `RESPONSE_EXOKAY, `RESPONSE_SLVERR, `RESPONSE_DECERR}
+  <BUSER>               // Output
+  );
+  
+//AXI4 MASTER CHANNEL READ BURST API TEMPLATES
+
+//AXI4 Master Channel SEND_READ_ADDRESS API
+<BFM_INST>.SEND_READ_ADDRESS (
+  <ID>,                 // Input (typ = 0)
+  <WR_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED} (typ = `BURST_TYPE_INCR = 2'b01)
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE} (typ = `LOCK_TYPE_NORMAL = 1'b0)
+  <CACHE>,              // Input (typ = `MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011)
+  <PROT>,               // Input (typ = `PROT_DATA_SECURE_UNPRIV = 3'b000)
+  <REGION>,             // Input (typ = 0)
+  <QOS>,                // Input (typ = 0)
+  <ARUSER>              // Input (typ = 0)
+  );
+  
+//AXI4 Master Channel RECEIVE_READ_BURST API
+<BFM_INST>.RECEIVE_READ_BURST (
+  <ID>,                 // Input bitstring of length `ID_WIDTH
+  <RD_ADDR>,            // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255} 
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED}
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE}
+  <RD_DATA>,            // Output bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <RD_RSP>,             // Output bitstring of length (<BURST_LEN>+1) * 2
+  <RUSER>               // Output bitstring of length (<BURST_LEN>+1) * `RUSER_BUS_WIDTH
+  );
+  
+//AXI4 SLAVE CHANNEL WRITE BURST API TEMPLATES
+
+//AXI4 Slave Channel Write RECEIVE_WRITE_ADDRESS API
+<BFM_INST>.RECEIVE_WRITE_ADDRESS (
+  <ID>,                 // Input (typ = 0)
+  <IDVALID>,            // Input range{`IDVALID_TRUE, IDVALID_FALSE} (typ = IDVALID_FALSE = 1'b0)
+  <ADDR>,               // Output bitstring of typ length 32                                                                              
+  <BURST_LEN>,          // Output range {0-255}                                                                                           
+  <BURST_SIZE>,         // Output range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}                                            
+  <BURST_TYPE>,         // Output range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED}        
+  <LOCK>,               // Output range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE}               
+  <CACHE>,              // Output (4 bits)                                                          
+  <PROT>,               // Output (3 bits)                                                              
+  <REGION>,             // Output (4 bits)                                                                                               
+  <QOS>,                // Output (4 bits)                                                                                               
+  <AWUSER>,             // Output                                                                                              
+  <W_IDTAG>             // Output bitstring of length `ID_WIDTH
+  );
+  
+//AXI4 Slave Channel Write RECEIVE_WRITE_BURST API               
+<BFM_INST>.RECEIVE_WRITE_BURST (
+  <ADDR>,               // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED}
+  <WR_DATA>,            // Output bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8)
+  <DATA_SIZE>,          // Output integer (number of data bytes)
+  <WUSER>               // Output bitstring of length (<BURST_LEN>+1) * `WUSER_BUS_WIDTH
+  );
+  
+//AXI4 Slave Channel Write SEND_WRITE_RESPONSE API      
+<BFM_INST>.SEND_WRITE_RESPONSE (
+  <W_IDTAG>,            // Input bitstring of length `ID_WIDTH
+  <RESPONSE>,           // Input range{`RESPONSE_OKAY, `RESPONSE_EXOKAY, `RESPONSE_SLVERR, `RESPONSE_DECERR} (typ = `RESPONSE_OKAY = 2'b00)
+  <BUSER>               // Input (typ = 0)
+  );
+
+//AXI4 SLAVE CHANNEL READ BURST API TEMPLATES
+
+//AXI4 Slave Channel Read RECEIVE_READ_ADDRESS API   
+<BFM_INST>.RECEIVE_READ_ADDRESS (
+  <ID>,                 // Input (typ = 0)
+  <IDVALID>,            // Input range{`IDVALID_TRUE, IDVALID_FALSE} (typ = IDVALID_FALSE = 1'b0)
+  <ADDR>,               // Output bitstring of typ length 32
+  <BURST_LEN>,          // Output range {0-255}                                                                                           
+  <BURST_SIZE>,         // Output range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}                                            
+  <BURST_TYPE>,         // Output range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED}        
+  <LOCK>,               // Output range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE}               
+  <CACHE>,              // Output (4 bits)                                                          
+  <PROT>,               // Output (3 bits)                                                              
+  <REGION>,             // Output (4 bits)                                                                                               
+  <QOS>,                // Output (4 bits)                                                                                               
+  <ARUSER>,             // Output                                                                                              
+  <R_IDTAG>             // Output bitstring of length `ID_WIDTH
+  );
+  
+//AXI4 Slave Channel Read SEND_READ_BURST API         
+<BFM_INST>.SEND_READ_BURST (
+  <R_IDTAG>,            // Input bitstring of length `ID_WIDTH
+  <ADDR>,               // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-255}
+  <BURST_SIZE>,         // Input range {`BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <BURST_TYPE>,         // Input range {`BURST_TYPE_INCR, `BURST_TYPE_WRAP, `BURST_TYPE_FIXED}
+  <LOCK>,               // Input range {`LOCK_TYPE_NORMAL, `LOCK_TYPE_EXCLUSIVE}
+  <RD_DATA>,            // Input bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <RUSER>               // Input bitstring of length (<BURST_LEN>+1) * `RUSER_BUS_WIDTH (typ = 0)
+  );
+  
+//AXI BFM Channel Level Info
+<BFM_INST>.set_channel_level_info (<LEVEL>);  // Input Report Info range {1-Enabled, 0-Disabled}
+
+//ZYNQ BFM API TEMPLATES
+  
+//Zynq Master BFM Write Burst
+<ZYNQ_BFM_INST>.write_burst (
+  <ADDR>,               // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-15}
+  <ZYNQ_BURST_SIZE>,    // Input range {`ZYNQ_BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <ZYNQ_BURST_TYPE>,    // Input range {`ZYNQ_BURST_TYPE_INCR, `ZYNQ_BURST_TYPE_WRAP, `ZYNQ_BURST_TYPE_FIXED} (typ = `ZYNQ_BURST_TYPE_INCR = 2'b01)
+  <ZYNQ_LOCK>,          // Input range {`ZYNQ_LOCK_TYPE_NORMAL, `ZYNQ_LOCK_TYPE_EXCLUSIVE, `ZYNQ_LOCK_TYPE_LOCKED} (typ = `ZYNQ_LOCK_TYPE_NORMAL = 2'b00)
+  <ZYNQ_CACHE>,         // Input (typ = `ZYNQ_MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011)
+  <ZYNQ_PROT>,          // Input (typ = `ZYNQ_PROT_DATA_SECURE_UNPRIV = 3'b000)
+  <WR_DATA>,            // Input bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <DATA_SIZE>,          // Input = (<BURST_LEN>+1) * `DATA_WIDTH_BYTES
+  <WR_RSP>              // Output range {`RESPONSE_OKAY, `RESPONSE_EXOKAY, `RESPONSE_SLVERR, `RESPONSE_DECERR}   
+  );
+
+//Zynq Master BFM Read Burst  
+<ZYNQ_BFM_INST>.read_burst (
+  <ADDR>,               // Input bitstring of typ length 32
+  <BURST_LEN>,          // Input range {0-15}
+  <ZYNQ_BURST_SIZE>,    // Input range {`ZYNQ_BURST_SIZE_<2**n>_BYTES (2**n <= `DATA_WIDTH_BYTES)}
+  <ZYNQ_BURST_TYPE>,    // Input range {`ZYNQ_BURST_TYPE_INCR, `ZYNQ_BURST_TYPE_WRAP, `ZYNQ_BURST_TYPE_FIXED} (typ = `ZYNQ_BURST_TYPE_INCR = 2'b01)
+  <ZYNQ_LOCK>,          // Input range {`ZYNQ_LOCK_TYPE_NORMAL, `ZYNQ_LOCK_TYPE_EXCLUSIVE, `ZYNQ_LOCK_TYPE_LOCKED} (typ = `ZYNQ_LOCK_TYPE_NORMAL = 2'b00)
+  <ZYNQ_CACHE>,         // Input (typ = `ZYNQ_MEM_TYPE_NORM_NONCACHE_BUF = 4'b0011)
+  <ZYNQ_PROT>,          // Input (typ = `ZYNQ_PROT_DATA_SECURE_UNPRIV = 3'b000)
+  <RD_DATA>,            // Output bitstring of length (<BURST_LEN>+1) * `DATA_WIDTH_BYTES*8
+  <RD_RSP>              // Output bitstring of length (<BURST_LEN>+1) * 2
+  );
+
+//Zynq Soft Reset
+<ZYNQ_BFM_INST>.fpga_soft_reset (<RESET_CTRL>);  // Input (Deassert Reset typ = 32'h00000000)
+
+//Zynq BFM Wait Interrupt
+<ZYNQ_BFM_INST>.wait_interrupt (
+  <INTR_BIT>,           // Input range {0-3}
+  <IRQ_STATUS>          // Output (4 bits)
+  );
+
+//Zynq BFM Slave Profile
+<ZYNQ_BFM_INST>.set_slave_profile (
+  <PORT_NAME>,          // Input string range {"ALL", "M_AXI_GP0", "M_AXI_GP1", "S_AXI_GP0", "S_AXI_GP1", "S_AXI_HP0", "S_AXI_HP1", "S_AXI_HP2", "S_AXI_HP3", "S_AXI_ACP"}
+  <LATENCY>             // Input range {2'b00 = BEST_CASE, 2'b01 = AVG_CASE, 2'b10 = WORST_CASE, 2'b11 = RANDOM} (typ = 2'b01)
+  );
+
+//Zynq BFM Channel Level Info
+<ZYNQ_BFM_INST>.set_channel_level_info (
+  <PORT_NAME>,          // Input string range {"ALL", "M_AXI_GP0", "M_AXI_GP1", "S_AXI_GP0", "S_AXI_GP1", "S_AXI_HP0", "S_AXI_HP1", "S_AXI_HP2", "S_AXI_HP3", "S_AXI_ACP"}
+  <LEVEL>               // Input Report Info range {1=Enabled, 0=Disabled}
+  );
